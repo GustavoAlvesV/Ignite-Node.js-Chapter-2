@@ -1,7 +1,7 @@
 import { Category } from "../model/Category";
 
 // DTO => Data transfer OBJECT
-interface ICreateCategoryDto {
+interface ICreateCategoryDTO {
   name: string;
   description: string;
 }
@@ -9,7 +9,7 @@ interface ICreateCategoryDto {
 interface ICategoriesRepository {
   findByName(name: string): Category;
   list(): Category[];
-  create({ name, description }): ICreateCategoryDto;
+  create({ name, description }): ICreateCategoryDTO;
 }
 
-export { ICategoriesRepository, ICreateCategoryDto };
+export { ICategoriesRepository, ICreateCategoryDTO };

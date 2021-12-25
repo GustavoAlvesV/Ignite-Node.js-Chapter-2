@@ -1,17 +1,29 @@
-import { Category } from "../model/Category";
+import { Category } from "../../model/Category";
 import {
   ICategoriesRepository,
-  ICreateCategoryDto,
-} from "./ICategoriesRespository";
+  ICreateCategoryDTO,
+} from "../ICategoriesRespository";
+
+// eslint-disable-next-line spaced-comment
+//singleton => criar apenas uma instância de uma classe, essa sendo global.
 
 class CategoriesRepository implements ICategoriesRepository {
   private categories: Category[];
 
-  constructor() {
+  private static INSTANCE: CategoriesRepository;
+
+  private constructor() {
     this.categories = [];
   }
 
-  create({ name, description }: ICreateCategoryDto): Category {
+  public static getInstance(): CategoriesRepository {
+    if (!CategoriesRepository.INSTANCE) {
+      CategoriesRepository.INSTANCE = new CategoriesRepository();
+    }
+    return CategoriesRepository.INSTANCE;
+  }
+
+  create({ name, description }: ICreateCategoryDTO): Category {
     const categoty = new Category();
 
     Object.assign(categoty, {
